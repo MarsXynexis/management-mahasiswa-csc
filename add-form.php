@@ -71,7 +71,7 @@ if (!isset($_SESSION["login"])) {
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                         <div class="space-y-2">
                             <label class="text-sm font-bold text-slate-700 ml-1">Nama Lengkap</label>
-                            <input name="name" type="text" placeholder="Andi Wijaya" class="w-full px-5 py-4 rounded-2xl bg-slate-50 border-none focus:ring-4 focus:ring-indigo-500/10 outline-none transition-all">
+                            <input name="nama" type="text" placeholder="Andi Wijaya" class="w-full px-5 py-4 rounded-2xl bg-slate-50 border-none focus:ring-4 focus:ring-indigo-500/10 outline-none transition-all">
                         </div>
                         <div class="space-y-2">
                             <label class="text-sm font-bold text-slate-700 ml-1">NIM</label>
@@ -79,10 +79,11 @@ if (!isset($_SESSION["login"])) {
                         </div>
                         <div class="space-y-2 md:col-span-2">
                             <label class="text-sm font-bold text-slate-700 ml-1">Jurusan</label>
-                            <select name="major" class="w-full px-5 py-4 rounded-2xl bg-slate-50 border-none focus:ring-4 focus:ring-indigo-500/10 outline-none transition-all appearance-none cursor-pointer">
+                            <select name="prodi_id" class="w-full px-5 py-4 rounded-2xl bg-slate-50 border-none focus:ring-4 focus:ring-indigo-500/10 outline-none transition-all appearance-none cursor-pointer">
                                 <option value="">Pilih Jurusan</option>
-                                <option>Teknik Informatika</option>
-                                <option>Sistem Informasi</option>
+                                <option value="1">Teknik Informatika</option>
+                                <option value="2">Teknik Multimedia Jaringan</option>
+                                <option value="3">Teknik Multimedia Digital</option>
                             </select>
                         </div>
                     </div>

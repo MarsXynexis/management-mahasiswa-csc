@@ -1,33 +1,18 @@
-<?php 
+<?php
+require_once "db.php";
 
-$name = $_POST["name"];
-$nim = $_POST["nim"];
-$major = $_POST["major"];
+if (isset($_POST["nama"]) && isset($_POST["nim"]) && isset($_POST["prodi_id"])) {
+    $nama = $_POST["nama"];
+    $nim = $_POST["nim"];
+    $prodi_id = $_POST["prodi_id"];
 
-$filename = $_POST["name"] . ".jpg";
-$filenametmp = $_FILES["profile_picture"]["tmp_name"];
-move_uploaded_file($filenametmp, "../public/images/" . $filename);
+    $filename = $_POST["nama"] . ".jpg";
+    $filenametmp = $_FILES["profile_picture"]["tmp_name"];
+    move_uploaded_file($filenametmp, "../public/images/" . $filename);
+
+    $query = "INSERT INTO mahasiswa (nama, nim, prodi_id) VALUES ('$nama', '$nim', '$prodi_id')";
+    execute($query);
+    header("Location: ../index.php");
+}
 
 
-
-?>
-
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
-<body>
-    <p>Data mahasiswa berhasil ditambahkan!</p>
-    <?= $name . " - " . $nim . " - " . $major . "<br><br>" . $filename ?>
-    <br>
-    <img src="../public/images/<?= $filename ?>" alt="Profile Picture" width="200">
-    <br>
-    <button>
-        <a href="../index.php">Kembali ke Daftar Mahasiswa</a>
-    </button>
-
-</body>
-</html>

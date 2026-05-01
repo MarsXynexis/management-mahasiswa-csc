@@ -1,3 +1,12 @@
+<?php 
+require_once "controller/db.php";
+session_start();
+if (!isset($_SESSION["login"])) {
+    header('Location: login.php');
+    exit();
+}
+$mhs = query("SELECT * FROM mahasiswa WHERE id = " . $_GET["id"])[0];
+?>
 <!DOCTYPE html>
 <html lang="id">
 <head>
@@ -33,21 +42,23 @@
             </div>
 
             <div class="bg-white rounded-[2.5rem] shadow-sm border border-slate-100 p-10">
-                <form action="index.php" class="space-y-8">
+                <form action="controller/update-student.php" method="POST" class="space-y-8">
+                    <input type="hidden" name="id" value="<?php echo $mhs['id']; ?>">
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                         <div class="space-y-2">
                             <label class="text-sm font-bold text-slate-700 ml-1">Nama Lengkap</label>
-                            <input type="text" value="Ahmad Syaifullah" class="w-full px-5 py-4 rounded-2xl bg-slate-50 border-none focus:ring-4 focus:ring-indigo-500/10 outline-none transition-all">
+                            <input type="text" name="nama" value="<?php echo $mhs['nama']; ?>" class="w-full px-5 py-4 rounded-2xl bg-slate-50 border-none focus:ring-4 focus:ring-indigo-500/10 outline-none transition-all">
                         </div>
                         <div class="space-y-2">
                             <label class="text-sm font-bold text-slate-700 ml-1">NIM</label>
-                            <input type="text" value="22040101001" class="w-full px-5 py-4 rounded-2xl bg-slate-50 border-none focus:ring-4 focus:ring-indigo-500/10 outline-none transition-all">
+                            <input type="text" name="nim" value="<?php echo $mhs['nim']; ?>" class="w-full px-5 py-4 rounded-2xl bg-slate-50 border-none focus:ring-4 focus:ring-indigo-500/10 outline-none transition-all">
                         </div>
                         <div class="space-y-2 md:col-span-2">
                             <label class="text-sm font-bold text-slate-700 ml-1">Jurusan</label>
-                            <select class="w-full px-5 py-4 rounded-2xl bg-slate-50 border-none focus:ring-4 focus:ring-indigo-500/10 outline-none transition-all appearance-none cursor-pointer">
-                                <option selected>Teknik Informatika</option>
-                                <option>Sistem Informasi</option>
+                            <select name="prodi_id" class="w-full px-5 py-4 rounded-2xl bg-slate-50 border-none focus:ring-4 focus:ring-indigo-500/10 outline-none transition-all appearance-none cursor-pointer">
+                                <option value="1" <?= $mhs['prodi_id'] == 1 ? 'selected' : '' ?>>Teknik Informatika</option>
+                                <option value="2" <?= $mhs['prodi_id'] == 2 ? 'selected' : '' ?>>Teknik Multimedia dan Jaringan</option>
+                                <option value="3" <?= $mhs['prodi_id'] == 3 ? 'selected' : '' ?>>Teknik Multimedia Digital</option>
                             </select>
                         </div>
                     </div>
